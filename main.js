@@ -17,7 +17,7 @@ function isEven(number) {
 console.log(isEven(2));
 console.log(isEven(5));
 
-let arr = [15,1564,231,54,63584,34,684,63,54654,2,88,1,87,0,98];
+let arr = [15, 1564, 231, 54, 63584, 34, 684, 63, 54654, 2, 88, 1, 87, 0, 98];
 function sumArray(array) {
   if (array.length === 0) {
     return 0;
@@ -122,14 +122,16 @@ de sus promedios.
 */
 
 function Student(name, age, gpa) {
-  (this.name = name), (this.age = age), (this.gpa = gpa);
+  this.name = name;
+  this.age = age;
+  this.gpa = gpa;
 }
 const s1 = new Student("Agustin", 23, 10);
 const s2 = new Student("Alejandra", 49, 8);
 const s3 = new Student("Guido", 16, 9);
 const s4 = new Student("Jorge", 48, 8);
 
-const studentsArray = [s1, s2, s3, s4];
+let studentsArray = [s1, s2, s3, s4];
 console.log(studentsArray);
 
 function searchStudent(arr, name) {
@@ -150,16 +152,163 @@ function orderNumbers(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
     min = i;
     for (let j = i; j < arr.length; j++) {
-      if(arr[j]<arr[min]){
+      if (arr[j] < arr[min]) {
         min = j;
       }
     }
-    if(min!=i){
-      [arr[i],arr[min]]=[arr[min],arr[i]];
+    if (min != i) {
+      [arr[i], arr[min]] = [arr[min], arr[i]];
     }
   }
   return arr;
 }
 console.log(arr);
-console.log(arr.sort((a,b)=>b-a));
+console.log(arr.sort((a, b) => b - a));
 console.log(arr);
+
+function deleteStudent(arr, name) {
+  arr = arr.filter((student) => student.name != name);
+  return arr;
+}
+console.log(studentsArray);
+studentsArray = deleteStudent(studentsArray, "Jorge");
+console.log(studentsArray);
+
+// 21. Crear un objeto `coche` con propiedades como `marca`, `modelo` y `anio`, y métodos como
+// `arrancar` y `detener`.
+// 22. Crear un constructor `Persona` con propiedades `nombre` y `edad`, y un método `saludar`
+// que imprima un saludo personalizado.
+// 23. Crear un método `agregarProducto` a la función constructora `Carrito` que agregue un
+// producto al carrito.
+class Vehicle {
+  #brand;
+  #model;
+  #year;
+
+  constructor(brand, model, year) {
+    this.#brand = brand;
+    this.#model = model;
+    this.#year = year;
+  }
+  go() {
+    console.log("The car is moving");
+  }
+  stop() {
+    console.log("The car stopped");
+  }
+  set setBrand(brand) {
+    this.#brand = brand;
+  }
+  set setModel(model) {
+    this.#model = model;
+  }
+  set setYear(year) {
+    this.#year = year;
+  }
+  get getBrand() {
+    return this.#brand;
+  }
+
+  get getModel() {
+    return this.#model;
+  }
+  get getYear() {
+    return this.#year;
+  }
+}
+const car1 = new Vehicle("Dodge", "Charger", 2023);
+console.log(car1.getBrand);
+console.log(car1.getModel);
+console.log(car1.getYear);
+car1.go();
+car1.stop();
+
+class Person {
+  #name;
+  #age;
+  constructor(name, age) {
+    this.#name = name;
+    this.#age = age;
+  }
+  set setAge(age) {
+    this.#age = age;
+  }
+  set setName(name) {
+    this.#name = name;
+  }
+  get getName() {
+    return this.#name;
+  }
+  get getAge() {
+    return this.#age;
+  }
+  saludar() {
+    console.log("Hi, my name is " + this.#name);
+  }
+}
+const person1 = new Person("Juancho", 23);
+console.log(person1.getName);
+console.log(person1.getAge);
+person1.saludar();
+
+class myBag {
+  constructor() {
+    this.products = [];
+  }
+
+  addProduct(product) {
+    this.products.push(product);
+  }
+}
+
+// Ejemplo de uso:
+const bag = new myBag();
+
+const product1 = {
+  name: "T-Shirt",
+  price: 20,
+};
+
+const product2 = {
+  name: "Pant",
+  price: 30,
+};
+const product3 = {
+  name: "Socks",
+  price: 10.5,
+};
+
+bag.addProduct(product1);
+bag.addProduct(product2);
+bag.addProduct(product3);
+
+console.log(bag.products);
+
+function sumTotalMyBag(arr) {
+  const sum = arr.reduce((acc, element) => acc + element.price, 0);
+  return sum;
+}
+console.log(sumTotalMyBag(bag.products));
+
+function createCalculator() {
+  return {
+    add: function (a, b) {
+      return a + b;
+    },
+    substract: function (a, b) {
+      return a - b;
+    },
+    multiply: function (a, b) {
+      return a * b;
+    },
+    divide: function (a, b) {
+      return b === 0 ? "Cannot divide by zero" : a / b;
+    },
+  };
+}
+const calculator = createCalculator();
+console.log(calculator.add(5, 7));
+console.log(calculator.substract(10, 20));
+console.log(calculator.multiply(8, 5));
+console.log(calculator.divide(14, 2));
+console.log(calculator.divide(14, 0));
